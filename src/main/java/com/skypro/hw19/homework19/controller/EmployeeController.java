@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/employee")
@@ -19,21 +20,38 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return employeeService.addEmployee(firstName,lastName);
+    public Employee addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName
+            ,@RequestParam("job") Integer job, @RequestParam("salary") Integer salary) {
+        return employeeService.addEmployee(firstName,lastName,job,salary);
     }
 
     @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String firstName,@RequestParam String lastName) {
+    public Employee removeEmployee(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName) {
         return employeeService.delEmployee(firstName,lastName);
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String firstName,@RequestParam String lastName) {
+    public Employee findEmployee(@RequestParam("firstName") String firstName,@RequestParam("lastName") String lastName) {
         return employeeService.findEmployee(firstName,lastName);
     }
+
+    @GetMapping("/findMaxInDep")
+    public Employee findMaxInDep(@RequestParam("job") Integer job) {
+        return employeeService.getMaxSalary(job);
+    }
+
+    @GetMapping("/findMinInDep")
+    public Employee findMinInDep(@RequestParam("job") Integer job) {
+        return employeeService.getMinSalary(job);
+    }
+
+    @GetMapping("/allbydep")
+    public Set<Employee> getAllByDep(@RequestParam("job") Integer job){
+        return employeeService.getAllByJob(job);
+    }
+
     @GetMapping("/all")
-    public Map<String,Employee> getAll(){
-        return employeeService.employees;
+    public Map<Integer,Set<Employee>> getAll(){
+        return employeeService.getAll();
     }
 }

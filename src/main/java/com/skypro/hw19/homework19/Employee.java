@@ -7,10 +7,15 @@ public class Employee {
 
     private final String lastName;
 
-    public Employee(String firstName, String lastName)
+    private final Integer job;
+    private final Integer salary;
+
+    public Employee(String firstName, String lastName, Integer job, Integer salary)
     {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.job = job;
+        this.salary = salary;
     }
 
     public String getFirstName() {
@@ -19,6 +24,14 @@ public class Employee {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int getJob(){
+        return job;
+    }
+
+    public int getSalary(){
+        return salary;
     }
 
     @Override
@@ -36,6 +49,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "{\"firstName\" : \"" + getFirstName() + "\", \"lastName\" : \"" + getLastName() +"\"}";
+        return "{\"firstName\" : \"" + getFirstName() + "\", \"lastName\" : \"" + getLastName() +
+                "\", \"job\" : \"" +getJob()+"\", \"salary\" : \""+getSalary()+"\"}";
     }
 }
