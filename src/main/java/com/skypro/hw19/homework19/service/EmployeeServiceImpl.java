@@ -6,8 +6,11 @@ import com.skypro.hw19.homework19.exception.EmployeeNotFoundException;
 import com.skypro.hw19.homework19.exception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    private final Map<String,Employee> employees = new HashMap<>();
     @Override
     public Employee addEmployee(String firstName, String lastName,Integer job,Integer salary) {
         Employee employee = new Employee(firstName,lastName,job,salary);
@@ -41,5 +44,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }else {
             return employee;
         }
+    }
+
+    public Collection<Employee> getAll(){
+        return employees.values();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -34,7 +35,7 @@ public class DepartmentsController {
     }
 
     @GetMapping("/all")
-    public Map<Integer,Set<Employee>> getAll(){
-        return departmentService.getAll();
+    public Map<Integer, List<Employee>> getAllSorted(){
+        return departmentService.getAllSorted();
     }
 }
