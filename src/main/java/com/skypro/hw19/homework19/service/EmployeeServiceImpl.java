@@ -6,11 +6,14 @@ import com.skypro.hw19.homework19.exception.EmployeeNotFoundException;
 import com.skypro.hw19.homework19.exception.EmployeeStorageIsFullException;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
+    private final Map<String,Employee> employees = new HashMap<>();
     @Override
-    public Employee addEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName,lastName);
+    public Employee addEmployee(String firstName, String lastName,Integer job,Integer salary) {
+        Employee employee = new Employee(firstName,lastName,job,salary);
         if (employees.containsValue(employee)){
                 throw new EmployeeAlreadyAddedException("Сотрудник уже существует");
         }
@@ -25,7 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee delEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName,lastName);
+        Employee employee = new Employee(firstName,lastName,null,null);
         if (!employees.containsValue(employee)){
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }
@@ -35,11 +38,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findEmployee(String firstName, String lastName) {
-        Employee employee = new Employee(firstName,lastName);
+        Employee employee = new Employee(firstName,lastName,null,null);
         if (!employees.containsValue(employee)){
             throw new EmployeeNotFoundException("Сотрудник не найден");
         }else {
             return employee;
         }
+    }
+
+    public Collection<Employee> getAll(){
+        return employees.values();
     }
 }
