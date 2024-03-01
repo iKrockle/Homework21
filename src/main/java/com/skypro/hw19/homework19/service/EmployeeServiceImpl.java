@@ -2,8 +2,10 @@ package com.skypro.hw19.homework19.service;
 
 import com.skypro.hw19.homework19.Employee;
 import com.skypro.hw19.homework19.exception.EmployeeAlreadyAddedException;
+import com.skypro.hw19.homework19.exception.EmployeeBadParamException;
 import com.skypro.hw19.homework19.exception.EmployeeNotFoundException;
 import com.skypro.hw19.homework19.exception.EmployeeStorageIsFullException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -13,6 +15,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String,Employee> employees = new HashMap<>();
     @Override
     public Employee addEmployee(String firstName, String lastName,Integer job,Integer salary) {
+        if (!StringUtils.isAlpha(firstName)||!StringUtils.isAlpha(firstName)){
+            throw new EmployeeBadParamException("В параметрах содержится неподдерживаемые символы");
+        }
+
         Employee employee = new Employee(firstName,lastName,job,salary);
         if (employees.containsValue(employee)){
                 throw new EmployeeAlreadyAddedException("Сотрудник уже существует");
