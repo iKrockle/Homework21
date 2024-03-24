@@ -14,12 +14,12 @@ import java.util.*;
 public class EmployeeServiceImpl implements EmployeeService {
     private final Map<String,Employee> employees = new HashMap<>();
     @Override
-    public Employee addEmployee(String firstName, String lastName,Integer job,Integer salary) {
+    public Employee addEmployee(String firstName, String lastName,Integer job,Double salary) {
         if (!StringUtils.isAlpha(firstName)||!StringUtils.isAlpha(firstName)){
             throw new EmployeeBadParamException("В параметрах содержится неподдерживаемые символы");
         }
 
-        Employee employee = new Employee(firstName,lastName,job,salary);
+        Employee employee = new Employee(firstName,lastName,job, salary);
         if (employees.containsValue(employee)){
                 throw new EmployeeAlreadyAddedException("Сотрудник уже существует");
         }

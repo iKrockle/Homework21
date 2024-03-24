@@ -2,10 +2,7 @@ package com.skypro.hw19.homework19.controller;
 
 import com.skypro.hw19.homework19.Employee;
 import com.skypro.hw19.homework19.service.DepartmentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -19,22 +16,26 @@ public class DepartmentsController {
     public DepartmentsController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-    @GetMapping("/max-salary")
-    public Employee findMaxInDep(@RequestParam("job") Integer job) {
+    @GetMapping("/{id}/salary/max")
+    public Double findMaxInDep(@RequestParam("job") Integer job) {
         return departmentService.getMaxSalary(job);
     }
 
-    @GetMapping("/min-salary")
-    public Employee findMinInDep(@RequestParam("job") Integer job) {
+    @GetMapping("/{id}/salary/min")
+    public Double findMinInDep(@RequestParam("job") Integer job) {
         return departmentService.getMinSalary(job);
     }
+    @GetMapping("/{id}/salary/sum")
+    public Double getSalarySumByDepartment(@PathVariable Integer id) {
+        return departmentService.getSalarySum(id);
+    }
 
-    @GetMapping("/all-by-dep")
+    @GetMapping("/{id}/employees")
     public Set<Employee> getAllByDep(@RequestParam("job") Integer job){
         return departmentService.getAllByJob(job);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/employees")
     public Map<Integer, List<Employee>> getAllSorted(){
         return departmentService.getAllSorted();
     }

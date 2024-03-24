@@ -9,6 +9,7 @@ import java.util.Set;
 public interface DepartmentService{
     Set<Employee> getAllByJob(Integer job);
     Map<Integer, List<Employee>> getAllSorted();
-    Employee getMaxSalary(Integer job);
-    Employee getMinSalary(Integer job);
+    Double getMaxSalary(Integer job);
+    Double getMinSalary(Integer job);
+    Double getSalarySum(Integer job);
 }
