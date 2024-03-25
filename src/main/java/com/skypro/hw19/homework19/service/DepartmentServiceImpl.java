@@ -18,32 +18,29 @@ public class DepartmentServiceImpl implements DepartmentService{
         this.employeeService = employeeService;
     }
 
-    public Employee getMaxSalary(Integer job){
-        Optional<Employee> emp = employeeService.getAll()
+    public Double getMaxSalary(Integer job){
+        return employeeService.getAll()
                 .stream()
                 .filter(v->v.getJob()==job)
-                .max(Comparator.comparingInt(Employee::getSalary));
-        Employee employee = emp.orElse(null);
-        if (employee!=null){
-            return employee;
-        }
-        else {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
-        }
+                .max(Comparator.comparing(Employee::getSalary))
+                .map(Employee::getSalary)
+                .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник с максимальной зарплатой не найден"));
     }
 
-    public Employee getMinSalary(Integer job){
-        Optional<Employee> emp = employeeService.getAll()
+    public Double getMinSalary(Integer job){
+        return employeeService.getAll()
                 .stream()
                 .filter(v->v.getJob()==job)
-                .min(Comparator.comparingInt(Employee::getSalary));
-        Employee employee = emp.orElse(null);
-        if (employee!=null){
-            return employee;
-        }
-        else {
-            throw new EmployeeNotFoundException("Сотрудник не найден");
-        }
+                .min(Comparator.comparing(Employee::getSalary))
+                .map(Employee::getSalary)
+                .orElseThrow(() -> new EmployeeNotFoundException("Сотрудник с минимальной зарплатой не найден"));
+    }
+
+    public Double getSalarySum(Integer job) {
+        return employeeService.getAll().stream()
+                .filter(v->v.getJob()==job)
+                .map(Employee::getSalary)
+                .reduce(0.0, Double::sum);
     }
 
     public Set<Employee> getAllByJob(Integer job){

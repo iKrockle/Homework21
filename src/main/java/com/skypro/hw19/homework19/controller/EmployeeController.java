@@ -19,7 +19,7 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName
-            ,@RequestParam("job") Integer job, @RequestParam("salary") Integer salary) {
+            ,@RequestParam("job") Integer job, @RequestParam("salary") Double salary) {
         return employeeService.addEmployee(StringUtils.capitalize(firstName),StringUtils.capitalize(lastName),job,salary);
     }
 
