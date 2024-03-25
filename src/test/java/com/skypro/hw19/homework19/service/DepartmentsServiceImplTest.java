@@ -1,10 +1,8 @@
-package com.skypro.hw19.homework19.controller;
+package com.skypro.hw19.homework19.service;
 
 import com.skypro.hw19.homework19.Employee;
 import com.skypro.hw19.homework19.exception.EmployeeNotFoundException;
-import com.skypro.hw19.homework19.service.DepartmentServiceImpl;
 
-import com.skypro.hw19.homework19.service.EmployeeServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class DepartmentsControllerTest {
+class DepartmentsServiceImplTest {
 
     @Mock
     private EmployeeServiceImpl employeeService;

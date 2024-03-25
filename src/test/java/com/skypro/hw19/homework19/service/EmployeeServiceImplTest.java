@@ -1,11 +1,10 @@
-package com.skypro.hw19.homework19.controller;
+package com.skypro.hw19.homework19.service;
 
 import com.skypro.hw19.homework19.Employee;
 import com.skypro.hw19.homework19.exception.EmployeeAlreadyAddedException;
 import com.skypro.hw19.homework19.exception.EmployeeBadParamException;
 import com.skypro.hw19.homework19.exception.EmployeeNotFoundException;
 import com.skypro.hw19.homework19.exception.EmployeeStorageIsFullException;
-import com.skypro.hw19.homework19.service.EmployeeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmployeeControllerTest {
+class EmployeeServiceImplTest {
     private EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 
     private final String firstName = "Ivan";
